@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="compte" class="com.example.projetobserverdesignpattern.Compte">
+        <constructor-arg>
+            <list>
+                <ref bean="client" />
+                <ref bean="conseillerfinancier" />
+                <ref bean="gestionnaireclient" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="client" class="com.example.projetobserverdesignpattern.Client" />
+    <bean id="conseillerfinancier" class="com.example.projetobserverdesignpattern.ConseillerFinancier" />
+    <bean id="gestionnaireclient" class="com.example.projetobserverdesignpattern.GestionnaireClient" />
+
+</beans>
+
+
