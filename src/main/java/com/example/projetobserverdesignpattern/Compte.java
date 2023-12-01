@@ -38,6 +38,9 @@ public class Compte {
         }
     }
 
+    public double getSolde() {
+        return this.solde;
+    }
     public void setObservateurs(List<Observateur> observateurs) {
         this.observateurs = observateurs;
     }
