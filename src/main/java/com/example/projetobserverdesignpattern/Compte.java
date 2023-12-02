@@ -1,6 +1,5 @@
 package com.example.projetobserverdesignpattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 @Component
 public class Compte {
     private double solde;
-    private List<Observateur> observateurs = new ArrayList<>();
+    private List<Observateur> observateurs;
 
     public Compte(List<Observateur> observateurs) {
         this.observateurs = observateurs;

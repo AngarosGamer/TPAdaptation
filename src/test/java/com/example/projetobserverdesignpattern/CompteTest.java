@@ -16,7 +16,6 @@ public class CompteTest {
 
     @Configuration
     static class CompteConfig {
-
     }
     ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
     Compte compte = (Compte) context.getBean("compte");
@@ -48,18 +47,31 @@ public class CompteTest {
         compte.effectuerTransaction(0);
         assertThat(compte.getSolde()).isEqualTo(0);
     }
-    /* Test vérifiant si le premier observateur du compte mis à jour reçoit bien la notification appropriée */
+
+    /* Test vérifiant si la conjointe du client du compte mis à jour reçoit bien la notification appropriée */
+    @Test
+    void testConjointeRecuNotification() {
+        compte.effectuerTransaction(10);
+        assertThat(compte.getObservateurs().get(0).getReceivedNotification()).isEqualTo("Le compte est maintenant créditeur");
+    }
+    /* Test vérifiant si le gestionnaire du compte mis à jour reçoit bien la notification appropriée */
+    @Test
+    void testGestionnaireRecuNotification() {
+        compte.effectuerTransaction(10);
+        assertThat(compte.getObservateurs().get(1).getReceivedNotification()).isEqualTo("Le compte est maintenant créditeur");
+    }
+    /* Test vérifiant si le conseiller du compte mis à jour reçoit bien la notification appropriée */
     @Test
     void testConseillerRecuNotification() {
         compte.effectuerTransaction(10);
-        assertThat(compte.getObservateurs().get(0).getReceivedNotification()).isEqualTo("Le compte est maintenant créditeur");
+        assertThat(compte.getObservateurs().get(2).getReceivedNotification()).isEqualTo("Le compte est maintenant créditeur");
     }
 
     /* Test vérifiant si le deuxième observateur du compte mis à jour reçoit bien la notification appropriée */
     @Test
     void testClientRecuNotification() {
         compte.effectuerTransaction(10);
-        assertThat(compte.getObservateurs().get(1).getReceivedNotification()).isEqualTo("Le compte est maintenant créditeur");
+        assertThat(compte.getObservateurs().get(3).getReceivedNotification()).isEqualTo("Le compte est maintenant créditeur");
     }
 
 
