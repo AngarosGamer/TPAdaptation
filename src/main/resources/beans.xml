@@ -9,6 +9,7 @@
                 <ref bean="client" />
                 <ref bean="conseillerfinancier" />
                 <ref bean="gestionnaireclient" />
+                <ref bean="conjointeclient" />
             </list>
         </constructor-arg>
     </bean>
@@ -16,7 +17,6 @@
     <bean id="client" class="com.example.projetobserverdesignpattern.Client" />
     <bean id="conseillerfinancier" class="com.example.projetobserverdesignpattern.ConseillerFinancier" />
     <bean id="gestionnaireclient" class="com.example.projetobserverdesignpattern.GestionnaireClient" />
+    <bean id="conjointeclient" class="com.example.projetobserverdesignpattern.ConjointeClient" />
 
 </beans>
-
-

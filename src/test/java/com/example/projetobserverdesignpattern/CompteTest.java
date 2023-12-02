@@ -21,14 +21,20 @@ public class CompteTest {
         @Bean
         public ConseillerFinancier conseiller() { return new ConseillerFinancier(); }
         @Bean
-        public Compte compte(ConseillerFinancier conseiller, Client client) {
-            return new Compte(List.of(conseiller, client));
+        public GestionnaireClient gestionnaire() { return new GestionnaireClient(); }
+        @Bean
+        public ConjointeClient conjointe() { return new ConjointeClient(); }
+        @Bean
+        public Compte compte(ConjointeClient conjointe, GestionnaireClient gestionnaire, ConseillerFinancier conseiller, Client client) {
+            return new Compte(List.of(conjointe, gestionnaire, conseiller, client));
         }
     }
     /* Définition des variables de test */
     private Client client = new CompteConfig().client();
     private ConseillerFinancier conseiller = new CompteConfig().conseiller();
-    private Compte compte = new CompteConfig().compte(conseiller, client);
+    private GestionnaireClient gestionnaire = new CompteConfig().gestionnaire();
+    private ConjointeClient conjointe = new CompteConfig().conjointe();
+    private Compte compte = new CompteConfig().compte(conjointe, gestionnaire, conseiller, client);
 
     /* Test de l'ajout d'un solde négatif
        On vérifie si la mise à jour du solde fonctionne, et on peut ensuite vérifier si le message
@@ -56,6 +62,18 @@ public class CompteTest {
     void TestSoldeNul() {
         compte.effectuerTransaction(0);
         assertThat(compte.getSolde()).isEqualTo(0);
+    }
+    /* Test vérifiant si la conjointe du client du compte mis à jour reçoit bien la notification appropriée */
+    @Test
+    void testConjointeRecuNotification() {
+        compte.effectuerTransaction(10);
+        assertThat(conjointe.getReceivedNotification()).isEqualTo("Le compte est maintenant créditeur");
+    }
+    /* Test vérifiant si le gestionnaire du compte mis à jour reçoit bien la notification appropriée */
+    @Test
+    void testGestionnaireRecuNotification() {
+        compte.effectuerTransaction(10);
+        assertThat(gestionnaire.getReceivedNotification()).isEqualTo("Le compte est maintenant créditeur");
     }
     /* Test vérifiant si le conseiller du compte mis à jour reçoit bien la notification appropriée */
     @Test
