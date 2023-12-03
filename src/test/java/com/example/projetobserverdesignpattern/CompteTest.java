@@ -3,11 +3,8 @@ package com.example.projetobserverdesignpattern;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
