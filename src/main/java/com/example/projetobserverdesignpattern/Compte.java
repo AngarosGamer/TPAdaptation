@@ -3,11 +3,12 @@ package com.example.projetobserverdesignpattern;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Component
-public class Compte {
+public class Compte implements Sujet {
     private double solde;
-    private final List<Observateur> observateurs;
+    private List<Observateur> observateurs;
 
     public Compte(List<Observateur> observateurs) {
         this.observateurs = observateurs;
@@ -40,13 +41,18 @@ public class Compte {
         return this.solde;
     }
 
-    /* No usage of this setter, kept to maintain observer pattern
-    public void setObservateurs(List<Observateur> observateurs) {
-        this.observateurs = observateurs;
+    @Override
+    public void ajouterObservateur(Observateur observateur) {
+        observateurs.add(observateur);
     }
-    */
+    @Override
+    public void supprimerObservateur(Observateur observateur) {
+        observateurs.remove(observateur);
+    }
 
     public List<Observateur> getObservateurs() {
         return observateurs;
     }
+
+
 }
